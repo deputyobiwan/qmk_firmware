@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "keymap_german.h"
 
 enum layers {
     _QWERTY = 0,
@@ -24,7 +25,6 @@ enum layers {
     _FUNCTION,
     _ADJUST,
 };
-
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
