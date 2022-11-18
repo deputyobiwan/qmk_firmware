@@ -32,6 +32,11 @@ enum layers
 uint8_t base_layers[5] = {_COLEMAK_DH, _NEO, _QWERTZ, _GAMING};
 uint8_t current_base_layer = _QWERTZ;
 
+// Aliases for readability
+#define QWERTZ   DF(_QWERTZ)
+#define NEO      DF(_NEO)
+#define COLEMAK  DF(_COLEMAK_DH)
+
 /*
 // Tap Dance declarations
 enum {
@@ -112,7 +117,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
-
     /*
     * Base Layer: Gaming, Overwatch, Isaac
     *
@@ -176,29 +180,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                        _______, KC_BTN2,   KC_MS_L,   KC_MS_D, _______, /**/ _______, KC_0,    _______, _______, _______
     ),
 
-
     /*
     * Adjust Layer: Function keys, RGB, media
     *
-    * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |        |      |      |      |BRI DN|BRI UP|                              |      |  F7  |  F8  |  F9  | F10  |  F11   |
-    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * |        | TOG  | SAI  | HUI  | VAI  | MOD  |                              | VolUp|  F4  |  F5  |  F6  | F11  |  F12   |
-    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |        |      | SAD  | HUD  | VAD  | RMOD |      |      |  |      |      | VolDn|  F1  |  F2  |  F3  | F12  |        |
-    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+    * ,----------------------------------------------.                              ,-------------------------------------------.
+    * |  QWERTZ   |      |      |      |BRI DN|BRI UP|                              |      |  F7  |  F8  |  F9  | F10  |  F11   |
+    * |--------+------+------+------+------+-----...-|                              |------+------+------+------+------+--------|
+    * |  NEO      | TOG  | SAI  | HUI  | VAI  | MOD  |                              | VolUp|  F4  |  F5  |  F6  | F11  |  F12   |
+    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+-----------|
+    * |  COLEMAK  |      | SAD  | HUD  | VAD  | RMOD |      |      |  |      |      | VolDn|  F1  |  F2  |  F3  | F12  |        |
+    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+-------------------------'
     *                        |      | Prev | Next |      |      |  |      |      | Prev | Next |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_FUNC] = LAYOUT(
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU,                   /**/                   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-        _______, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                   /**/                   KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,  KC_F12,
-        _______, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, /**/ _______, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
+        QWERTZ, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU,                   /**/                   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+        NEO, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                   /**/                   KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,  KC_F12,
+        COLEMAK, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, /**/ _______, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
                                    _______, KC_MPRV, KC_MNXT, _______, _______, /**/ _______, _______, KC_MPRV, KC_MNXT, _______
     ),
-
-
 
 // /*
 //  * Layer template
