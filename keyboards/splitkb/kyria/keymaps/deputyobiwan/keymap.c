@@ -20,9 +20,9 @@
 
 enum layers
 {
-    _COLEMAK_DH,
+    _COLEMAK_DH = 0,
     _NEO,
-    _QWERTZ = 0,
+    _QWERTZ,
     _GAMING,
     _LAYER_3,
     _LAYER_4,
