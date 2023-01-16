@@ -26,3 +26,6 @@
 
 // Lets you roll mod-tap keys
 #define IGNORE_MOD_TAP_INTERRUPT
+
+// Define mouse constant speed (https://github.com/qmk/qmk_firmware/blob/master/docs/feature_mouse_keys.md#constant-mode)
+#define MK_3_SPEED

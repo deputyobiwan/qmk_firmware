@@ -162,17 +162,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
     * |        | home | left | down | right| end  |                              |   /  |   4  |   5  |   6  |   .  |   ;    | // TODO: Tap Dance ./, -> :/;
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |        |  esc |  tab |insert|Mouse1|MS up | MS r |      |  |      |      |   :  |   1  |   2  |   3  |   ,  |   =    |
+    * |        |  esc |  tab |insert|      | MS u | MS r | MS SU|  | MS 1 | MS 2 |   :  |   1  |   2  |   3  |   ,  |   =    |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-    *                        |      |Mouse2| MS l | MS d |      |  |      |   0  |      |      |      |
+    *                        |      |      | MS l | MS d |      |  | MS SD|   0  |MS A0 |MS A1 |MS A2 |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_LAYER_4] = LAYOUT(
-        KC_ESCAPE, KC_PGUP, KC_BSPC, KC_UP,     KC_DELETE, KC_PGDN,                     /**/                   DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
-        _______,   KC_HOME, KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,                      /**/                   DE_SLSH, KC_4, KC_5, KC_6, KC_DOT,  DE_SCLN,
-        _______,   KC_ESC,  KC_TAB,  KC_INSERT, KC_BTN1,   KC_MS_U,   KC_MS_R, _______, /**/ _______, _______, DE_COLN, KC_1, KC_2, KC_3, KC_COMM, DE_EQL,
-                                       _______, KC_BTN2,   KC_MS_L,   KC_MS_D, _______, /**/ _______, KC_0,    _______, _______, _______
+        KC_ESCAPE, KC_PGUP, KC_BSPC, KC_UP,     KC_DELETE, KC_PGDN,                             /**/                   DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
+        _______,   KC_HOME, KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,                              /**/                   DE_SLSH, KC_4, KC_5, KC_6, KC_DOT,  DE_SCLN,
+        _______,   KC_ESC,  KC_TAB,  KC_INSERT, _______,   KC_MS_UP,  KC_MS_RIGHT, KC_MS_WH_UP, /**/ KC_MS_BTN1, KC_MS_BTN2, DE_COLN, KC_1, KC_2, KC_3, KC_COMM, DE_EQL,
+                                       _______, _______,   KC_MS_LEFT, KC_MS_DOWN, _______,     /**/ KC_MS_WH_DOWN, KC_0, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2
     ),
 
     /*
