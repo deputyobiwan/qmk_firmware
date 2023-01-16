@@ -18,18 +18,29 @@
 #include "keymap_german.h"
 #include <string.h>
 
+#ifdef AUDIO_ENABLE
+// Define my own sounds
+#define MY_OWN_SOUND HD_NOTE(_C8), HD_NOTE(_D3), HD_NOTE(_C6)
+float layer0_song[][2] = SONG(MY_OWN_SOUND);
+#endif
+
 enum layers
 {
     _COLEMAK_DH = 0,
     _NEO,
     _QWERTZ,
-    _GAMING,
     _LAYER_3,
     _LAYER_4,
     _FUNC
 };
 
-uint8_t base_layers[5] = {_COLEMAK_DH, _NEO, _QWERTZ, _GAMING};
+enum custom_keycodes {
+  MOUSEJIGGLERMACRO
+};
+
+bool mouse_jiggle_mode = false;
+
+uint8_t base_layers[5] = {_COLEMAK_DH, _NEO, _QWERTZ};
 uint8_t current_base_layer = _QWERTZ;
 
 /*
@@ -113,27 +124,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     /*
-    * Base Layer: Gaming, Overwatch, Isaac
-    *
-    * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |  tab   |   Q  |   A  |   W  |   D  |   E  |                              |   Z  | left |   up | right|   P  |Ü/AltGr |
-    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * |    X   |LShift|   A  |   S  |   D  |   R  |                              |   H  | left | down | right|   Ö  |Ä/RShift|
-    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |    Y   |LCtrl |   X  |   C  |   V  |   F  |  esc | esc  |  | LAY5 | FUNC |   N  |   M  | , ;  | . :  | - _  | ß/RCtl |
-    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
-    *                        |      |      |      | SYM  |NAVNUM|  | SYM  |NAVNUM|      |      |      |
-    *                        `----------------------------------'  `----------------------------------'
-    */
-    [_GAMING] = LAYOUT(
-            KC_TAB,   KC_Q,   KC_A,   KC_W,   KC_D,   KC_E,                         /**/                                             DE_Z,     KC_LEFT, KC_UP,   KC_RIGHT, KC_P,    ALGR_T(DE_UDIA),
-            KC_X,  KC_LSFT,   KC_A,   KC_S,   KC_D,   KC_R,                         /**/                                             KC_H,     KC_LEFT, KC_DOWN, KC_RIGHT, DE_ODIA, RSFT_T(DE_ADIA),
-            KC_Y, KC_LCTL,   KC_X,   KC_C,   KC_V,   KC_F, KC_ESCAPE, KC_ESCAPE,   /**/ MO(_FUNC),         LT(_LAYER_3, KC_F5),  KC_N,     KC_M,    KC_COMM, KC_DOT,   DE_MINS, RCTL_T(DE_SS),
-                                   KC_MPLY, KC_LGUI, KC_LALT, KC_SPC      , KC_ENT, /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL,  KC_MUTE
-    ),
-
-    /*
     * Layer 3 symbols
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
@@ -193,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         DF(_QWERTZ)    , XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU,                   /**/                   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
         DF(_NEO)       , RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                   /**/                   KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,  KC_F12,
         DF(_COLEMAK_DH), XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, /**/ _______, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
-                                           _______, KC_MPRV, KC_MNXT, _______, _______, /**/ _______, _______, KC_MPRV, KC_MNXT, _______
+                                           _______, KC_MPRV, KC_MNXT, _______, _______, /**/ _______, _______, KC_MPRV, KC_MNXT, MOUSEJIGGLERMACRO
     ),
 
 // /*
@@ -225,4 +215,33 @@ layer_state_t layer_state_set_user(layer_state_t state)
     state = update_tri_layer_state(state, _LAYER_3, _LAYER_4, _FUNC);
 
     return state;
+}
+
+void matrix_scan_user(void) {
+  if (mouse_jiggle_mode) {
+    SEND_STRING(SS_DELAY(10));
+    tap_code(KC_MS_UP);
+    tap_code(KC_MS_DOWN);
+    SEND_STRING(SS_DELAY(30));
+    tap_code(KC_MS_LEFT);
+    tap_code(KC_MS_RIGHT);
+  }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MOUSEJIGGLERMACRO:
+      if (record->event.pressed) {
+        if (mouse_jiggle_mode) {
+            SEND_STRING(SS_DELAY(15));
+            mouse_jiggle_mode = false;
+        } else {
+            SEND_STRING(SS_DELAY(15));
+            mouse_jiggle_mode = true;
+            PLAY_SONG(layer0_song);
+        }
+      }
+      break;
+  }
+  return true;
 }
