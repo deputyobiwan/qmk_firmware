@@ -4,4 +4,3 @@ ENCODER_ENABLE = yes       # Enables the use of one or more encoders
 RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
 BOOTLOADER = atmel-dfu # Bootloader selection
 MOUSEKEY_ENABLE = yes
-AUDIO_ENABLE = yes           # Audio output on
