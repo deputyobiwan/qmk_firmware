@@ -29,6 +29,12 @@ enum layers
     _FUNC
 };
 
+enum custom_keycodes {
+  MOUSEJIGGLERMACRO
+};
+
+bool mouse_jiggle_mode = false;
+
 uint8_t base_layers[5] = {_COLEMAK_DH, _NEO, _QWERTZ, _GAMING};
 uint8_t current_base_layer = _QWERTZ;
 
@@ -179,20 +185,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * Adjust Layer: Function keys, RGB, media
     *
     * ,----------------------------------------------.                              ,-------------------------------------------.
-    * |  QWERTZ   |      |      |      |BRI DN|BRI UP|                              |      |  F7  |  F8  |  F9  | F10  |  F11   |
+    * |  QWERTZ   |      |      |      |BRI DN|BRI UP|                              |      |  F7  |  F8  |  F9  | F10  |        |
     * |--------+------+------+------+------+-----...-|                              |------+------+------+------+------+--------|
-    * |  NEO      | TOG  | SAI  | HUI  | VAI  | MOD  |                              | VolUp|  F4  |  F5  |  F6  | F11  |  F12   |
+    * |  NEO      | TOG  | SAI  | HUI  | VAI  | MOD  |                              | VolUp|  F4  |  F5  |  F6  | F11  |        |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+-----------|
-    * |  COLEMAK  |      | SAD  | HUD  | VAD  | RMOD |      |      |  |      |      | VolDn|  F1  |  F2  |  F3  | F12  |        |
+    * |  COLEMAK  |      | SAD  | HUD  | VAD  | RMOD |      |      |MOUSEJIGGLER|   | VolDn|  F1  |  F2  |  F3  | F12  |        |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+-------------------------'
     *                        |      | Prev | Next |      |      |  |      |      | Prev | Next |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_FUNC] = LAYOUT(
-        DF(_QWERTZ)    , XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU,                   /**/                   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-        DF(_NEO)       , RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                   /**/                   KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,  KC_F12,
-        DF(_COLEMAK_DH), XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, /**/ _______, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
+        DF(_QWERTZ)    , XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU,                   /**/                             XXXXXXX, KC_F7,   KC_F8,   KC_F9,   KC_F10, XXXXXXX,
+        DF(_NEO)       , RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                   /**/                             KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11, XXXXXXX,
+        DF(_COLEMAK_DH), XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, /**/ MOUSEJIGGLERMACRO, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
                                            _______, KC_MPRV, KC_MNXT, _______, _______, /**/ _______, _______, KC_MPRV, KC_MNXT, _______
     ),
 
@@ -225,4 +231,34 @@ layer_state_t layer_state_set_user(layer_state_t state)
     state = update_tri_layer_state(state, _LAYER_3, _LAYER_4, _FUNC);
 
     return state;
+}
+
+void matrix_scan_user(void) {
+  if (mouse_jiggle_mode) {
+    SEND_STRING(SS_DELAY(10));
+    tap_code(KC_MS_UP);
+    tap_code(KC_MS_DOWN);
+    SEND_STRING(SS_DELAY(30));
+    tap_code(KC_MS_LEFT);
+    tap_code(KC_MS_RIGHT);
+  }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MOUSEJIGGLERMACRO:
+      if (record->event.pressed) {
+        if (mouse_jiggle_mode) {
+            SEND_STRING(SS_DELAY(15));
+            mouse_jiggle_mode = false;
+            SEND_STRING("MouseJiggles deactivated");
+        } else {
+            SEND_STRING(SS_DELAY(15));
+            mouse_jiggle_mode = true;
+            SEND_STRING("MouseJiggles activated");
+        }
+      }
+      break;
+  }
+  return true;
 }
