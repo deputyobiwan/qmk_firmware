@@ -20,14 +20,20 @@
 
 enum layers
 {
-    _COLEMAK_DH,
+    _COLEMAK_DH = 0,
     _NEO,
-    _QWERTZ = 0,
+    _QWERTZ,
     _GAMING,
     _LAYER_3,
     _LAYER_4,
     _FUNC
 };
+
+enum custom_keycodes {
+  MOUSEJIGGLERMACRO
+};
+
+bool mouse_jiggle_mode = false;
 
 uint8_t base_layers[5] = {_COLEMAK_DH, _NEO, _QWERTZ, _GAMING};
 uint8_t current_base_layer = _QWERTZ;
@@ -42,7 +48,7 @@ enum {
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
-    [TD_GUI_STRG] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTRL),
+    [TD_GUI_STRG] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LCTL),
     [TD_ALT_SHIFT] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_LSFT),
 };
 */
@@ -66,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_COLEMAK_DH] = LAYOUT(
             LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_F,         KC_P,               KC_B,                                                                 /**/                                             DE_J,               KC_L,               KC_U,         DE_Y,         DE_ODIA,      ALGR_T(DE_UDIA),
             KC_LSFT,              LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S), LCTL_T(KC_T),       LT(_LAYER_4, KC_G),                                                   /**/                                             LT(_LAYER_4, KC_M), LCTL_T(KC_N),       LALT_T(KC_E), LGUI_T(KC_I), RSFT_T(KC_O), RSFT_T(DE_ADIA),
-            KC_LCTRL,             DE_Z,         KC_X,         KC_C,         LT(_LAYER_3, KC_D), KC_V,               LT(_LAYER_4, KC_ESCAPE), LT(_LAYER_3, KC_ESCAPE), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_K,               LT(_LAYER_3, KC_H), KC_COMM,      KC_DOT,       DE_MINS,      RCTL_T(DE_SS),
+            KC_LCTL,             DE_Z,         KC_X,         KC_C,         LT(_LAYER_3, KC_D), KC_V,               LT(_LAYER_4, KC_ESCAPE), LT(_LAYER_3, KC_ESCAPE), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_K,               LT(_LAYER_3, KC_H), KC_COMM,      KC_DOT,       DE_MINS,      RCTL_T(DE_SS),
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT),    /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
@@ -87,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NEO] = LAYOUT(
             LT(_LAYER_3, KC_TAB), KC_X,         KC_V,         KC_L,         KC_C,               KC_W,                                                              /**/                                             DE_K,               KC_H,               KC_G,         KC_F,         KC_Q,         ALGR_T(DE_SS),
             KC_LSFT,              LSFT_T(KC_U), LGUI_T(KC_I), LALT_T(KC_A), LCTL_T(KC_E),       LT(_LAYER_4, KC_O),                                                /**/                                             LT(_LAYER_4, KC_S), LCTL_T(KC_N),       LALT_T(KC_R), LGUI_T(KC_T), LSFT_T(KC_D), RSFT_T(DE_Y),
-            KC_LCTRL,             DE_UDIA,      DE_ODIA,      DE_ADIA,      LT(_LAYER_3, KC_P), DE_Z,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_B,               LT(_LAYER_3, KC_M), KC_COMM,      KC_DOT,       KC_J,         RCTL_T(DE_MINS),
+            KC_LCTL,             DE_UDIA,      DE_ODIA,      DE_ADIA,      LT(_LAYER_3, KC_P), DE_Z,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_B,               LT(_LAYER_3, KC_M), KC_COMM,      KC_DOT,       KC_J,         RCTL_T(DE_MINS),
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
@@ -108,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTZ] = LAYOUT(
             LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_E,         KC_R,               KC_T,                                                           /**/                                             DE_Z,               KC_U,               KC_I,         KC_O,         KC_P,            ALGR_T(DE_UDIA),
             KC_LSFT,              LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F),       LT(_LAYER_4, KC_G),                                             /**/                                             LT(_LAYER_4, KC_H), LCTL_T(KC_J),       LALT_T(KC_K), LGUI_T(KC_L), RSFT_T(DE_ODIA), RSFT_T(DE_ADIA),
-            KC_LCTRL,             DE_Y,         KC_X,         KC_C,         LT(_LAYER_3, KC_V), KC_B,               LT(_LAYER_4, KC_ESC), LT(_LAYER_3, KC_ESC), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_N,               LT(_LAYER_3, KC_M), KC_COMM,      KC_DOT,       DE_MINS,         RCTL_T(DE_SS),
+            KC_LCTL,             DE_Y,         KC_X,         KC_C,         LT(_LAYER_3, KC_V), KC_B,               LT(_LAYER_4, KC_ESC), LT(_LAYER_3, KC_ESC), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_N,               LT(_LAYER_3, KC_M), KC_COMM,      KC_DOT,       DE_MINS,         RCTL_T(DE_SS),
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
@@ -129,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_GAMING] = LAYOUT(
             KC_TAB,   KC_Q,   KC_A,   KC_W,   KC_D,   KC_E,                         /**/                                             DE_Z,     KC_LEFT, KC_UP,   KC_RIGHT, KC_P,    ALGR_T(DE_UDIA),
             KC_X,  KC_LSFT,   KC_A,   KC_S,   KC_D,   KC_R,                         /**/                                             KC_H,     KC_LEFT, KC_DOWN, KC_RIGHT, DE_ODIA, RSFT_T(DE_ADIA),
-            KC_Y, KC_LCTRL,   KC_X,   KC_C,   KC_V,   KC_F, KC_ESCAPE, KC_ESCAPE,   /**/ MO(_FUNC),         LT(_LAYER_3, KC_F5),  KC_N,     KC_M,    KC_COMM, KC_DOT,   DE_MINS, RCTL_T(DE_SS),
+            KC_Y, KC_LCTL,   KC_X,   KC_C,   KC_V,   KC_F, KC_ESCAPE, KC_ESCAPE,   /**/ MO(_FUNC),         LT(_LAYER_3, KC_F5),  KC_N,     KC_M,    KC_COMM, KC_DOT,   DE_MINS, RCTL_T(DE_SS),
                                    KC_MPLY, KC_LGUI, KC_LALT, KC_SPC      , KC_ENT, /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL,  KC_MUTE
     ),
 
@@ -162,37 +168,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
     * |        | home | left | down | right| end  |                              |   /  |   4  |   5  |   6  |   .  |   ;    | // TODO: Tap Dance ./, -> :/;
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |        |  esc |  tab |insert|Mouse1|MS up | MS r |      |  |      |      |   :  |   1  |   2  |   3  |   ,  |   =    |
+    * |        |  esc |  tab |insert|      | MS u | MS r | MS SU|  | MS 1 | MS 2 |   :  |   1  |   2  |   3  |   ,  |   =    |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-    *                        |      |Mouse2| MS l | MS d |      |  |      |   0  |      |      |      |
+    *                        |      |      | MS l | MS d |      |  | MS SD|   0  |MS A0 |MS A1 |MS A2 |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_LAYER_4] = LAYOUT(
-        KC_ESCAPE, KC_PGUP, KC_BSPC, KC_UP,     KC_DELETE, KC_PGDOWN,                   /**/                   DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
-        _______,   KC_HOME, KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,                      /**/                   DE_SLSH, KC_4, KC_5, KC_6, KC_DOT,  DE_SCLN,
-        _______,   KC_ESC,  KC_TAB,  KC_INSERT, KC_BTN1,   KC_MS_U,   KC_MS_R, _______, /**/ _______, _______, DE_COLN, KC_1, KC_2, KC_3, KC_COMM, DE_EQL,
-                                       _______, KC_BTN2,   KC_MS_L,   KC_MS_D, _______, /**/ _______, KC_0,    _______, _______, _______
+        KC_ESCAPE, KC_PGUP, KC_BSPC, KC_UP,     KC_DELETE, KC_PGDN,                             /**/                   DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
+        _______,   KC_HOME, KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,                              /**/                   DE_SLSH, KC_4, KC_5, KC_6, KC_DOT,  DE_SCLN,
+        _______,   KC_ESC,  KC_TAB,  KC_INSERT, _______,   KC_MS_UP,  KC_MS_RIGHT, KC_MS_WH_UP, /**/ KC_MS_BTN1, KC_MS_BTN2, DE_COLN, KC_1, KC_2, KC_3, KC_COMM, DE_EQL,
+                                       _______, _______,   KC_MS_LEFT, KC_MS_DOWN, _______,     /**/ KC_MS_WH_DOWN, KC_0, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2
     ),
 
     /*
     * Adjust Layer: Function keys, RGB, media
     *
     * ,----------------------------------------------.                              ,-------------------------------------------.
-    * |  QWERTZ   |      |      |      |BRI DN|BRI UP|                              |      |  F7  |  F8  |  F9  | F10  |  F11   |
+    * |  QWERTZ   |      |      |      |BRI DN|BRI UP|                              |      |  F7  |  F8  |  F9  | F10  |        |
     * |--------+------+------+------+------+-----...-|                              |------+------+------+------+------+--------|
-    * |  NEO      | TOG  | SAI  | HUI  | VAI  | MOD  |                              | VolUp|  F4  |  F5  |  F6  | F11  |  F12   |
+    * |  NEO      | TOG  | SAI  | HUI  | VAI  | MOD  |                              | VolUp|  F4  |  F5  |  F6  | F11  |        |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+-----------|
-    * |  COLEMAK  |      | SAD  | HUD  | VAD  | RMOD |      |      |  |      |      | VolDn|  F1  |  F2  |  F3  | F12  |        |
+    * |  COLEMAK  |      | SAD  | HUD  | VAD  | RMOD |      |      |MOUSEJIGGLER|   | VolDn|  F1  |  F2  |  F3  | F12  |        |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+-------------------------'
     *                        |      | Prev | Next |      |      |  |      |      | Prev | Next |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_FUNC] = LAYOUT(
-        DF(_QWERTZ)    , XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU,                   /**/                   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-        DF(_NEO)       , RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                   /**/                   KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,  KC_F12,
-        DF(_COLEMAK_DH), XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, /**/ _______, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
+        DF(_QWERTZ)    , XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU,                   /**/                             XXXXXXX, KC_F7,   KC_F8,   KC_F9,   KC_F10, XXXXXXX,
+        DF(_NEO)       , RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                   /**/                             KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11, XXXXXXX,
+        DF(_COLEMAK_DH), XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, /**/ MOUSEJIGGLERMACRO, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
                                            _______, KC_MPRV, KC_MNXT, _______, _______, /**/ _______, _______, KC_MPRV, KC_MNXT, _______
     ),
 
@@ -225,4 +231,34 @@ layer_state_t layer_state_set_user(layer_state_t state)
     state = update_tri_layer_state(state, _LAYER_3, _LAYER_4, _FUNC);
 
     return state;
+}
+
+void matrix_scan_user(void) {
+  if (mouse_jiggle_mode) {
+    SEND_STRING(SS_DELAY(10));
+    tap_code(KC_MS_UP);
+    tap_code(KC_MS_DOWN);
+    SEND_STRING(SS_DELAY(30));
+    tap_code(KC_MS_LEFT);
+    tap_code(KC_MS_RIGHT);
+  }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MOUSEJIGGLERMACRO:
+      if (record->event.pressed) {
+        if (mouse_jiggle_mode) {
+            SEND_STRING(SS_DELAY(15));
+            mouse_jiggle_mode = false;
+            SEND_STRING("MouseJiggles deactivated");
+        } else {
+            SEND_STRING(SS_DELAY(15));
+            mouse_jiggle_mode = true;
+            SEND_STRING("MouseJiggles activated");
+        }
+      }
+      break;
+  }
+  return true;
 }
