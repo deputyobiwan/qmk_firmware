@@ -39,21 +39,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
     * Base Layer: Colemak-DH
     *
-    * .-----------------------------------------------.                                  .-----------------------------combo ß-----------.
-    * |       |   Q   |   W   |   F   |   P   |   B   |                                  |   J   |   L   |   U   |   Y   |   Ö   |       |
-    * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+combo ä+-------|
-    * |       | SUP/A | ALT/R | CTR/S | SFT/T |   G   |                                  |   M   | SFT/N | CTR/E | ALT/I | SUP/O |       |
-    * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+combo ü+-------|
+    * .-----------------------------------------------.                                  .-----------------------------------------------.
+    * |       |   Q   |   W   |   F   |   P   |   B   |                                  |   J   |   L   |  U Ü  |   Y   |   ß   |       |
+    * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
+    * |       |  A Ä  | ALT/R | CTR/S | SFT/T | SUP/G |                                  | SUP/M | SFT/N | CTR/E | ALT/I |  O Ö  |       |
+    * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |   Z   |   X   |   C   |   D   |   V   |       |       |  |       |       |   K   |   H   |  , ;  |  . :  |  - _  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |SYM/Spc|NUM/Ent|  |MSE/Tab|NAV/Bsp|       |       |       |
+    *                         |       |       |       |SYM/Spc|NUM/Ent|  |MS/Tab|NAV/Bsp|       |       |       |
     *                         `-----------------------------combo FUN-'  `----combo Del--------------------------'
     */
      [_COLEMAK_DH] = LAYOUT(
-       KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                  KC_J, KC_L, KC_U, KC_Y, DE_ODIA, KC_NO,
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_G,                                  KC_M, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-       KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V, KC_NO, KC_NO,      KC_NO, KC_NO, KC_K, KC_H, KC_NO, KC_NO, KC_NO, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+       KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                  KC_J, KC_L, KC_U, KC_Y, DE_SS, KC_NO,
+       KC_NO, KC_A, LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), LGUI_T(KC_G),                                  LGUI_T(KC_M), RSFT_T(KC_N), CTL_T(KC_E), LALT_T(KC_I), KC_O, KC_NO,
+       KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V, KC_NO, KC_NO,      KC_NO, KC_NO, KC_K, KC_H, KC_COMMA, KC_DOT, KC_MINUS, KC_NO,
+                            KC_NO, KC_NO, KC_NO, LT(_SYM,KC_SPACE), LT(_NUM,KC_ENTER),      LT(_MS,KC_TAB), LT(_NAV_MED,KC_BACKSPACE), KC_NO, KC_NO, KC_NO
     ),
 
     /*
@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       |       |       |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
-    * |       |       |       |       |       |       |                                  |       |  F4   |  F5   |  F6   |  F11  |       |
+    * |       |       |       |       |JIGGLE |       |                                  |       |  F4   |  F5   |  F6   |  F11  |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |       |       |       |       |       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
@@ -151,18 +151,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
      [_FUN] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                  KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                  KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
+       KC_NO, KC_NO, KC_NO, KC_NO, MOUSEJIGGLERMACRO, KC_NO,                                  KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     )
 };
 
-layer_state_t layer_state_set_user(layer_state_t state)
-{
-    // this will switch to layer _FUNC, if L3 & L4 got pressed
-    state = update_tri_layer_state(state, _LAYER_3, _LAYER_4, _FUNC);
-
-    return state;
+layer_state_t layer_state_set_user(layer_state_t state) {
+  state = update_tri_layer_state(state, _SYM, _NUM, _FUN); // this will switch to layer _FUN, if _SYM & _NUM got pressed
+  return state;
 }
 
 void matrix_scan_user(void) {
@@ -178,16 +175,52 @@ void matrix_scan_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case LT(0,KC_U):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_UDIA); // Intercept hold function to send ü
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+    case LT(0,KC_A):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_ADIA); // Intercept hold function to send ä
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+    case LT(0,KC_O):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_ODIA); // Intercept hold function to send ö
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+    case LT(0,KC_COMMA):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(KC_SEMICOLON); // Intercept hold function to send ;
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+    case LT(0,KC_DOT):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(KC_COLON); // Intercept hold function to send :
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+    case LT(0,KC_MINUS):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(KC_UNDERSCORE); // Intercept hold function to send _
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
     case MOUSEJIGGLERMACRO:
       if (record->event.pressed) {
         if (mouse_jiggle_mode) {
-            SEND_STRING(SS_DELAY(15));
-            mouse_jiggle_mode = false;
-            SEND_STRING("Deactivated");
+          SEND_STRING(SS_DELAY(15));
+          mouse_jiggle_mode = false;
+          SEND_STRING("Deactivated");
         } else {
-            SEND_STRING(SS_DELAY(15));
-            mouse_jiggle_mode = true;
-            SEND_STRING("Activated");
+          SEND_STRING(SS_DELAY(15));
+          mouse_jiggle_mode = true;
+          SEND_STRING("Activated");
         }
       }
       break;
