@@ -29,7 +29,7 @@ enum layers
 };
 
 enum custom_keycodes {
-  MOUSEJIGGLERMACRO
+  MOUSEJIGGLERMACRO = SAFE_RANGE
 };
 
 bool mouse_jiggle_mode = false;
