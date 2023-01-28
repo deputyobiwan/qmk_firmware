@@ -37,7 +37,7 @@ bool mouse_jiggle_mode = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /*
-    * Base Layer: Colemak-DH
+    * _COLEMAK_DH base layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |   Q   |   W   |   F   |   P   |   B   |                                  |   J   |   L   |  U Ü  |   Y   |   ß   |       |
@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     /*
-    * NAV_MED Layer
+    * _NAV_MED Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       |  UP   |       |       |                                  |  ESC  |       | PGUP  |       |       |       |
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     /*
-    * MS Layer
+    * _MS Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       | MS_UP |       |       |                                  |       |MS_W_LF|MS_W_UP|MS_W_RT|       |       |
@@ -97,10 +97,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     /*
-    * SYM Layer
+    * _SYM Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
-    * |       |       |       |       |       |  ESC  |                                  |  & |  |  [ ]  |   `   |  / \  |  # ~  |       |
+    * |       |       |       |       |       |  ESC  |                                  |  & |  |  [ ]  |  ´ `  |  / \  |  # ~  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
     * |       |  § °  |   ^   |   %   |   @   |  Bsp  |                                  |  $ €  |  ( )  |  " "  |   =   |   *   |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
@@ -110,14 +110,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_SYM] = LAYOUT(
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BACKSPACE,                                                   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_DELETE, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      DE_AMPR, DE_LBRC, DE_ACUT, DE_SLSH, DE_HASH, KC_NO,
+       KC_NO, DE_SECT, DE_CIRC, DE_PERC, DE_AT, KC_BACKSPACE,                                                   DE_DLR, DE_LPRN, DE_DQUO, DE_EQL, DE_ASTR, KC_NO,
+       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_DELETE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, DE_LCBR, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
+                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                              DE_EXLM, DE_QUES, KC_NO, KC_NO, KC_NO
     ),
 
     /*
-    * NUM Layer
+    * _NUM Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       |       |       |       |                                  |       |   7   |   8   |   9   |       |       |
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     /*
-    * FUN Layer
+    * _FUN Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       |       |       |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
@@ -175,42 +175,124 @@ void matrix_scan_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+
+    // Base Macros
     case LT(0,KC_U):
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_UDIA); // Intercept hold function to send ü
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
+
     case LT(0,KC_A):
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_ADIA); // Intercept hold function to send ä
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
+
     case LT(0,KC_O):
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_ODIA); // Intercept hold function to send ö
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
+
     case LT(0,KC_COMMA):
       if (!record->tap.count && record->event.pressed) {
         tap_code16(KC_SEMICOLON); // Intercept hold function to send ;
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
+
     case LT(0,KC_DOT):
       if (!record->tap.count && record->event.pressed) {
         tap_code16(KC_COLON); // Intercept hold function to send :
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
+
     case LT(0,KC_MINUS):
       if (!record->tap.count && record->event.pressed) {
         tap_code16(KC_UNDERSCORE); // Intercept hold function to send _
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
+
+    // _SYM Macros
+    case LT(_SYM,DE_LPRN):
+      if (record->event.pressed) {
+        SEND_STRING("(" ")" SS_TAP(X_LEFT));
+      }
+      break;
+
+    case LT(_SYM,DE_LCBR):
+      if (record->event.pressed) {
+        SEND_STRING("{" "}" SS_TAP(X_LEFT));
+      }
+      break;
+      
+    case LT(_SYM,DE_QUOT):
+      if (record->event.pressed) {
+        SEND_STRING("'" "'" SS_TAP(X_LEFT));
+      }
+      break;
+
+    case LT(_SYM,DE_DQUO):
+      if (record->event.pressed) {
+        SEND_STRING('"' '"' SS_TAP(X_LEFT));
+      }
+      break;
+
+    case LT(_SYM,DE_LBRC):
+      if (record->event.pressed) {
+        SEND_STRING("[" "]" SS_TAP(X_LEFT));
+      }
+      break;
+      
+    case LT(_SYM,DE_DLR):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_EURO); // Intercept hold function to send €
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    case LT(_SYM,DE_AMPR):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_PIPE); // Intercept hold function to send |
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    case LT(_SYM,DE_ACUT):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_GRV); // Intercept hold function to send `
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    case LT(_SYM,DE_SLSH):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_BSLS); // Intercept hold function to send (backslash)
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    case LT(_SYM,DE_HASH):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_TILD); // Intercept hold function to send ~
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    case LT(_SYM,DE_SECT):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_DEG); // Intercept hold function to send °
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    // _FUN Macros
     case MOUSEJIGGLERMACRO:
       if (record->event.pressed) {
         if (mouse_jiggle_mode) {
