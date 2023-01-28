@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
     * |       |       |       |       |       |       |                                  |       |   4   |   5   |   6   |       |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
-    * |       |       |  CUT  | PASTE | COPY  |       |       |       |  |       |       |       |   1   |   2   |   3   |       |       |
+    * |       |       |  CUT  | PASTE | COPY  |       |       |       |  |       |       |       |   1   |  2 ²  |  3 ³  |       |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |       |       |   X   |  |       |   0   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
@@ -288,6 +288,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case LT(_SYM,DE_SECT):
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_DEG); // Intercept hold function to send °
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    // _NUM Macros
+    case LT(_NUM,KC_2):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_SUP2); // Intercept hold function to send °
+        return false;
+      }
+      return true;             // Return true for normal processing of tap keycode
+
+    case LT(_NUM,KC_3):
+      if (!record->tap.count && record->event.pressed) {
+        tap_code16(DE_SUP3); // Intercept hold function to send °
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
