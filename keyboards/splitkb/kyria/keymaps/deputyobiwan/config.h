@@ -38,3 +38,5 @@
 #define MOUSEKEY_MAX_SPEED      6
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX    64
+
+#define COMBO_COUNT 1 // Increase when you use more combos, see: https://github.com/qmk/qmk_firmware/blob/master/docs/feature_combo.md

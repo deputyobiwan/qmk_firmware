@@ -18,6 +18,25 @@
 #include "keymap_german.h"
 #include <string.h>
 
+// Combos
+enum combos {
+  tab_bsp_delete
+};
+
+const uint16_t PROGMEM tab_bsp_combo[] = {KC_TAB, KC_BACKSPACE, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [tab_bsp_delete] = COMBO(tab_bsp_combo, KC_DELETE)
+};
+
+// Custom keys
+enum custom_keycodes {
+  MOUSEJIGGLERMACRO = SAFE_RANGE
+};
+
+bool mouse_jiggle_mode = false;
+
+// Layers
 enum layers
 {
     _COLEMAK_DH = 0,
@@ -27,12 +46,6 @@ enum layers
     _NUM,
     _FUN
 };
-
-enum custom_keycodes {
-  MOUSEJIGGLERMACRO = SAFE_RANGE
-};
-
-bool mouse_jiggle_mode = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -47,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |       |   Z   |   X   |   C   |   D   |   V   |       |       |  |       |       |   K   |   H   |  , ;  |  . :  |  - _  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |       |SYM/Spc|NUM/Ent|  |MS/Tab|NAV/Bsp|       |       |       |
-    *                         `-----------------------------combo FUN-'  `----combo Del--------------------------'
+    *                         `---------------------------------------'  `----combo Del--------------------------'
     */
      [_COLEMAK_DH] = LAYOUT(
        KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                                                                                  KC_J, KC_L, KC_U, KC_Y, DE_SS, KC_NO,
