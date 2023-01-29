@@ -108,14 +108,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |  CUT  | PASTE | COPY  |  Bsp  |       |       |  |       |       |   +   |  { }  |  ' '  |   <   |   >   |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |   X   |       |  |   !   |   ?   |       |       |       |
+    *                         |       |       |       |   X   | Trans |  |   !   |   ?   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_SYM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      DE_AMPR, DE_LBRC, DE_ACUT, DE_SLSH, DE_HASH, KC_NO,
        KC_NO, DE_SECT, DE_CIRC, DE_PERC, DE_AT, KC_DELETE,                                                   DE_DLR, DE_LPRN, DE_DQUO, DE_EQL, DE_ASTR, KC_NO,
        KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, DE_LCBR, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_NO,                              DE_EXLM, DE_QUES, KC_NO, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                              DE_EXLM, DE_QUES, KC_NO, KC_NO, KC_NO
     ),
 
     /*
@@ -128,14 +128,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |  CUT  | PASTE | COPY  |       |       |       |  |       |       |       |   1   |  2 ²  |  3 ³  |       |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |       |   X   |  |       |   0   |       |       |       |
+    *                         |       |       |       | Trans |   X   |  |       |   0   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_NUM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                                       KC_NO, KC_7, KC_8, KC_9, KC_NO, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                                       KC_NO, KC_4, KC_5, KC_6, KC_NO, KC_NO,
        KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_1, KC_2, KC_3, KC_NO, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_NO, KC_TRANSPARENT,                           KC_NO, KC_0, KC_NO, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                           KC_NO, KC_0, KC_NO, KC_NO, KC_NO
     ),
 
     /*
