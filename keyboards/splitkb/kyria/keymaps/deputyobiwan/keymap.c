@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      [_NAV_MED] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_UP, KC_NO, KC_NO,                                                                                KC_ESCAPE, KC_NO, KC_PAGE_UP, KC_NO, KC_NO, KC_NO,
        KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END,                                                                 KC_BACKSPACE, KC_NO, KC_PAGE_DOWN, KC_NO, KC_NO, KC_NO,
-       KC_NO, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_DELETE, KLCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
+       KC_NO, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_DELETE, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_LCTL, KC_LSFT,                                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     ),
 
@@ -233,72 +233,72 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true;             // Return true for normal processing of tap keycode
 
     // _SYM Macros
-    case LT(_SYM,DE_LPRN):
+    case DE_LPRN:
       if (record->event.pressed) {
-        SEND_STRING("(" ")" SS_TAP(X_LEFT));
+        SEND_STRING("()" SS_TAP(X_LEFT));
       }
       break;
 
-    case LT(_SYM,DE_LCBR):
+    case DE_LCBR:
       if (record->event.pressed) {
-        SEND_STRING("{" "}" SS_TAP(X_LEFT));
+        SEND_STRING("{}" SS_TAP(X_LEFT));
       }
       break;
       
-    case LT(_SYM,DE_QUOT):
+    case DE_QUOT:
       if (record->event.pressed) {
-        SEND_STRING("'" "'" SS_TAP(X_LEFT));
+        SEND_STRING("''" SS_TAP(X_LEFT));
       }
       break;
 
-    case LT(_SYM,DE_DQUO):
+    case DE_DQUO:
       if (record->event.pressed) {
-        SEND_STRING('"' '"' SS_TAP(X_LEFT));
+        SEND_STRING("""" SS_TAP(X_LEFT));
       }
       break;
 
-    case LT(_SYM,DE_LBRC):
+    case DE_LBRC:
       if (record->event.pressed) {
-        SEND_STRING("[" "]" SS_TAP(X_LEFT));
+        SEND_STRING("[]" SS_TAP(X_LEFT));
       }
       break;
       
-    case LT(_SYM,DE_DLR):
+    case DE_DLR:
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_EURO); // Intercept hold function to send €
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
 
-    case LT(_SYM,DE_AMPR):
+    case DE_AMPR:
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_PIPE); // Intercept hold function to send |
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
 
-    case LT(_SYM,DE_ACUT):
+    case DE_ACUT:
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_GRV); // Intercept hold function to send `
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
 
-    case LT(_SYM,DE_SLSH):
+    case DE_SLSH:
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_BSLS); // Intercept hold function to send (backslash)
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
 
-    case LT(_SYM,DE_HASH):
+    case DE_HASH:
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_TILD); // Intercept hold function to send ~
         return false;
       }
       return true;             // Return true for normal processing of tap keycode
 
-    case LT(_SYM,DE_SECT):
+    case DE_SECT:
       if (!record->tap.count && record->event.pressed) {
         tap_code16(DE_DEG); // Intercept hold function to send °
         return false;
