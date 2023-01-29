@@ -18,17 +18,6 @@
 #include "keymap_german.h"
 #include <string.h>
 
-// Combos
-enum combos {
-  tab_bsp_delete
-};
-
-const uint16_t PROGMEM tab_bsp_combo[] = {KC_TAB, KC_BACKSPACE, COMBO_END};
-
-combo_t key_combos[COMBO_COUNT] = {
-  [tab_bsp_delete] = COMBO(tab_bsp_combo, KC_DELETE)
-};
-
 // Custom keys
 enum custom_keycodes {
   MOUSEJIGGLERMACRO = SAFE_RANGE
