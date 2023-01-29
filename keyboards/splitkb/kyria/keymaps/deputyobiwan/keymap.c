@@ -63,9 +63,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                         `---------------------------------------'  `----combo Del--------------------------'
     */
      [_COLEMAK_DH] = LAYOUT(
-       KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                                                                                  KC_J, KC_L, KC_U, KC_Y, DE_SS, KC_NO,
+       KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                                                                                  KC_J, KC_L, KC_U, DE_Y, DE_SS, KC_NO,
        KC_NO, KC_A, LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), LGUI_T(KC_G),                                    LGUI_T(KC_M), RSFT_T(KC_N), CTL_T(KC_E), LALT_T(KC_I), KC_O, KC_NO,
-       KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V, KC_NO, KC_NO,                                                             KC_NO, KC_NO, KC_K, KC_H, KC_COMMA, KC_DOT, KC_MINUS, KC_NO,
+       KC_NO, DE_Z, KC_X, KC_C, KC_D, KC_V, KC_NO, KC_NO,                                                             KC_NO, KC_NO, KC_K, KC_H, KC_COMMA, KC_DOT, KC_MINUS, KC_NO,
                           KC_NO, KC_NO, KC_NO, LT(_SYM,KC_SPACE), LT(_NUM,KC_ENTER),      LT(_MS,KC_TAB), LT(_NAV_MED,KC_BACKSPACE), KC_NO, KC_NO, KC_NO
     ),
 
