@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |       |   Z   |   X   |   C   |   D   |   V   |       |       |  |       |       |   K   |   H   |  , ;  |  . :  |  - _  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |       |SYM/Spc|NUM/Ent|  |MS/Tab|NAV/Bsp|       |       |       |
-    *                         `---------------------------------------'  `----combo Del--------------------------'
+    *                         `---------------------------------------'  `--------------------------------------'
     */
      [_COLEMAK_DH] = LAYOUT(
        KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                                                                                  KC_J, KC_L, KC_U, DE_Y, DE_SS, KC_NO,
@@ -64,17 +64,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       |  UP   |       |       |                                  |  ESC  |       | PGUP  |       |       |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
-    * |       | HOME  | LEFT  | DOWN  | RIGHT |  END  |                                  |  Bsp  |       | PGDN  |       |       |       |
+    * |       | HOME  | LEFT  | DOWN  | RIGHT |  END  |                                  |  Del  |       | PGDN  |       |       |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
-    * |       |VOL_PP |VOL_MTE|VOL_DN |VOL_UP |       |       |       |  |       |       |  Del  | COPY  | PASTE |  CUT  |       |       |
+    * |       |VOL_PP |VOL_MTE|VOL_DN |VOL_UP |       |       |       |  |       |       |  Bsp  | COPY  | PASTE |  CUT  |       |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |       |  CTR  |  SFT  |  |       |   X   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_NAV_MED] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_UP, KC_NO, KC_NO,                                                                                KC_ESCAPE, KC_NO, KC_PAGE_UP, KC_NO, KC_NO, KC_NO,
-       KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END,                                                                 KC_BACKSPACE, KC_NO, KC_PAGE_DOWN, KC_NO, KC_NO, KC_NO,
-       KC_NO, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_DELETE, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
+       KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END,                                                                 KC_DELETE, KC_NO, KC_PAGE_DOWN, KC_NO, KC_NO, KC_NO,
+       KC_NO, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_BACKSPACE, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_LCTL, KC_LSFT,                                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     ),
 
@@ -104,17 +104,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       |       |       |  ESC  |                                  |  & |  |  [ ]  |  ´ `  |  / \  |  # ~  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
-    * |       |  § °  |   ^   |   %   |   @   |  Bsp  |                                  |  $ €  |  ( )  |  " "  |   =   |   *   |       |
+    * |       |  § °  |   ^   |   %   |   @   |  Del  |                                  |  $ €  |  ( )  |  " "  |   =   |   *   |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
-    * |       |       |  CUT  | PASTE | COPY  |  Del  |       |       |  |       |       |   +   |  { }  |  ' '  |   <   |   >   |       |
+    * |       |       |  CUT  | PASTE | COPY  |  Bsp  |       |       |  |       |       |   +   |  { }  |  ' '  |   <   |   >   |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |       |   X   |       |  |   !   |   ?   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_SYM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      DE_AMPR, DE_LBRC, DE_ACUT, DE_SLSH, DE_HASH, KC_NO,
-       KC_NO, DE_SECT, DE_CIRC, DE_PERC, DE_AT, KC_BACKSPACE,                                                   DE_DLR, DE_LPRN, DE_DQUO, DE_EQL, DE_ASTR, KC_NO,
-       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_DELETE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, DE_LCBR, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
+       KC_NO, DE_SECT, DE_CIRC, DE_PERC, DE_AT, KC_DELETE,                                                   DE_DLR, DE_LPRN, DE_DQUO, DE_EQL, DE_ASTR, KC_NO,
+       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, DE_LCBR, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                              DE_EXLM, DE_QUES, KC_NO, KC_NO, KC_NO
     ),
 
