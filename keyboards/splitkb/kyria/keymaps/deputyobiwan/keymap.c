@@ -18,13 +18,6 @@
 #include "keymap_german.h"
 #include <string.h>
 
-// Custom keys
-enum custom_keycodes {
-  MOUSEJIGGLERMACRO = SAFE_RANGE
-};
-
-bool mouse_jiggle_mode = false;
-
 // Layers
 enum layers
 {
@@ -35,6 +28,38 @@ enum layers
     _NUM,
     _FUN
 };
+
+// Custom keys
+#define U_Ü_MACRO LT(0, KC_U)
+#define A_Ä_MACRO LT(0, KC_A)
+#define O_Ö_MACRO LT(0, KC_O)
+#define COMMA_SEMICOLON_MACRO LT(0, KC_COMMA)
+#define DOT_COLON_MACRO LT(0, KC_DOT)
+#define MINUS_UNDERSCORE_MACRO LT(0, KC_SLSH)
+
+#define TWO_POWER_MACRO LT(_NUM, KC_2)
+#define THREE_CUBE_MACRO LT(_NUM, KC_3)
+
+// Custom keys with kc placeholders
+// See also https://getreuer.info/posts/keyboards/triggers/index.html
+#define DOLLAR_EURO_MACRO LT(_SYM, KC_1)
+#define AND_PIPE_MACRO LT(_SYM, KC_2)
+#define ACUT_GRAVE_MACRO LT(_SYM, KC_3)
+#define SLASH_BACKSLASH_MACRO LT(_SYM, KC_4)
+#define HASH_TILD_MACRO LT(_SYM, KC_5)
+#define SECT_DEG_MACRO LT(_SYM, KC_6)
+
+#define PARENTHESIS_MACRO LT(_SYM, KC_7)
+#define BRACKETS_MACRO LT(_SYM, KC_8)
+#define CURLY_BRACKETS_MACRO LT(_SYM, KC_9)
+#define QUOTES_MACRO LT(_SYM, KC_F10)
+#define QUOTES_US_MACRO LT(_SYM, KC_F11)
+
+// Custom feature-keys
+enum custom_keycodes {
+  MOUSEJIGGLERMACRO = SAFE_RANGE,
+};
+bool mouse_jiggle_mode = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -52,9 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                         `---------------------------------------'  `--------------------------------------'
     */
      [_COLEMAK_DH] = LAYOUT(
-       KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                                                                                  KC_J, KC_L, KC_U, DE_Y, DE_SS, KC_NO,
-       KC_NO, KC_A, LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), LGUI_T(KC_G),                                    LGUI_T(KC_M), RSFT_T(KC_N), CTL_T(KC_E), LALT_T(KC_I), KC_O, KC_NO,
-       KC_NO, DE_Z, KC_X, KC_C, KC_D, KC_V, KC_NO, KC_NO,                                                             KC_NO, KC_NO, KC_K, KC_H, KC_COMMA, KC_DOT, DE_MINS, KC_NO,
+       KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                                                                                  KC_J, KC_L, U_Ü_MACRO, DE_Y, DE_SS, KC_NO,
+       KC_NO, A_Ä_MACRO, LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), LGUI_T(KC_G),                                    LGUI_T(KC_M), RSFT_T(KC_N), CTL_T(KC_E), LALT_T(KC_I), O_Ö_MACRO, KC_NO,
+       KC_NO, DE_Z, KC_X, KC_C, KC_D, KC_V, KC_NO, KC_NO,                                                             KC_NO, KC_NO, KC_K, KC_H, COMMA_SEMICOLON_MACRO, DOT_COLON_MACRO, MINUS_UNDERSCORE_MACRO, KC_NO,
                           KC_NO, KC_NO, KC_NO, LT(_SYM,KC_SPACE), LT(_NUM,KC_ENTER),      LT(_MS,KC_TAB), LT(_NAV_MED,KC_BACKSPACE), KC_NO, KC_NO, KC_NO
     ),
 
@@ -112,9 +137,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_SYM] = LAYOUT(
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      DE_AMPR, DE_LBRC, DE_ACUT, DE_SLSH, DE_HASH, KC_NO,
-       KC_NO, DE_SECT, DE_CIRC, DE_PERC, DE_AT, KC_DELETE,                                                   DE_DLR, DE_LPRN, DE_DQUO, DE_EQL, DE_ASTR, KC_NO,
-       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, DE_LCBR, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
+       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      AND_PIPE_MACRO, BRACKETS_MACRO, ACUT_GRAVE_MACRO, SLASH_BACKSLASH_MACRO, HASH_TILD_MACRO, KC_NO,
+       KC_NO, SECT_DEG_MACRO, DE_CIRC, DE_PERC, DE_AT, KC_DELETE,                                                   DOLLAR_EURO_MACRO, PARENTHESIS_MACRO, QUOTES_MACRO, DE_EQL, DE_ASTR, KC_NO,
+       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, CURLY_BRACKETS_MACRO, QUOTES_US_MACRO, DE_LABK, DE_RABK, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                              DE_EXLM, DE_QUES, KC_NO, KC_NO, KC_NO
     ),
 
@@ -134,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      [_NUM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                                       KC_NO, KC_7, KC_8, KC_9, KC_NO, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                                       KC_NO, KC_4, KC_5, KC_6, KC_NO, KC_NO,
-       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_1, KC_2, KC_3, KC_NO, KC_NO,
+       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_1, TWO_POWER_MACRO, THREE_CUBE_MACRO, KC_NO, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                           KC_NO, KC_0, KC_NO, KC_NO, KC_NO
     ),
 
@@ -144,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       |       |       |       |       |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
-    * |       |       |       |       |JIGGLE |       |                                  |       |  F4   |  F5   |  F6   |  F11  |       |
+    * |       |       |       |       |JIGGLER|       |                                  |       |  F4   |  F5   |  F6   |  F11  |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |       |       |       |       |       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
@@ -175,139 +200,110 @@ void matrix_scan_user(void) {
   }
 }
 
+// Helper for implementing tap vs. long-press keys. Given a tap-hold
+// key event, replaces the hold function with `long_press_keycode`.
+static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_press_keycode) {
+  if (record->tap.count == 0) {  // Key is being held.
+    if (record->event.pressed) {
+      tap_code16(long_press_keycode);
+    }
+    return false;  // Skip default handling.
+  }
+  return true;  // Continue default handling.
+}
+
+// Helper for implementing tap vs. long-press of non-kc keys. Given a tap-hold
+// key event, replaces the hold function with `long_press_keycode`.
+static bool process_tap_or_long_press_no_kc_key(keyrecord_t* record, uint16_t tap_press_keycode, uint16_t long_press_keycode) {
+  if (record->tap.count > 0) {    // Key is being tapped.
+    if (record->event.pressed) {
+      register_code16(tap_press_keycode); // Handle tap press event...
+    } else {
+      unregister_code16(tap_press_keycode);// Handle tap release event...
+    }    
+  } else {                        // Key is being held.
+    if (record->event.pressed) {
+      register_code16(long_press_keycode); // Handle tap press event...
+    } else {
+      unregister_code16(long_press_keycode);// Handle tap release event...
+    }
+  }
+  return false;  // Skip default handling.
+}
+
+// Helper for implementing wrapper-symbols, e.g. printing "(" as first_string_keycode, then ")" as second_string_keycode and
+// then moving in between those strings with KC_LEFT.
+static bool process_tap_press_string_wrapper_key(keyrecord_t* record, uint16_t first_string_keycode, uint16_t second_string_keycode) {
+  if (record->tap.count && record->event.pressed) {
+    tap_code16(first_string_keycode);
+    tap_code16(second_string_keycode);
+    tap_code16(KC_LEFT);
+  }
+  return false;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
     // Base Macros
-    case LT(0,KC_U):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_UDIA); // Intercept hold function to send ü
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case U_Ü_MACRO:
+      return process_tap_or_long_press_key(record, DE_UDIA);
 
-    case LT(0,KC_A):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_ADIA); // Intercept hold function to send ä
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case A_Ä_MACRO:
+      return process_tap_or_long_press_key(record, DE_ADIA);
 
-    case LT(0,KC_O):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_ODIA); // Intercept hold function to send ö
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case O_Ö_MACRO:
+      return process_tap_or_long_press_key(record, DE_ODIA);
 
-    case LT(0,KC_COMMA):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(KC_SEMICOLON); // Intercept hold function to send ;
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case COMMA_SEMICOLON_MACRO:
+      return process_tap_or_long_press_key(record, DE_SCLN);
 
-    case LT(0,KC_DOT):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(KC_COLON); // Intercept hold function to send :
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case DOT_COLON_MACRO:
+      return process_tap_or_long_press_key(record, DE_COLN);
 
-    case LT(0,KC_MINUS):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(KC_UNDERSCORE); // Intercept hold function to send _
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case MINUS_UNDERSCORE_MACRO:
+      return process_tap_or_long_press_key(record, DE_UNDS);
 
     // _SYM Macros
-    case DE_LPRN:
-      if (record->event.pressed) {
-        SEND_STRING("()" SS_TAP(X_LEFT));
-      }
-      break;
+    case PARENTHESIS_MACRO:
+      return process_tap_press_string_wrapper_key(record, DE_LPRN, DE_RPRN);
 
-    case DE_LCBR:
-      if (record->event.pressed) {
-        SEND_STRING("{}" SS_TAP(X_LEFT));
-      }
-      break;
-      
-    case DE_QUOT:
-      if (record->event.pressed) {
-        SEND_STRING("''" SS_TAP(X_LEFT));
-      }
-      break;
+    case BRACKETS_MACRO:
+      return process_tap_press_string_wrapper_key(record, DE_LBRC, DE_RBRC);
 
-    case DE_DQUO:
-      if (record->event.pressed) {
-        SEND_STRING("""" SS_TAP(X_LEFT));
-      }
-      break;
+    case CURLY_BRACKETS_MACRO:
+      return process_tap_press_string_wrapper_key(record, DE_LCBR, DE_RCBR);
 
-    case DE_LBRC:
-      if (record->event.pressed) {
-        SEND_STRING("[]" SS_TAP(X_LEFT));
-      }
-      break;
-      
-    case DE_DLR:
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_EURO); // Intercept hold function to send €
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case QUOTES_MACRO:
+      return process_tap_press_string_wrapper_key(record, DE_DQUO, DE_DQUO);
 
-    case DE_AMPR:
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_PIPE); // Intercept hold function to send |
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case QUOTES_US_MACRO:
+      return process_tap_press_string_wrapper_key(record, DE_QUOT, DE_QUOT);
 
-    case DE_ACUT:
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_GRV); // Intercept hold function to send `
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case DOLLAR_EURO_MACRO:
+      return process_tap_or_long_press_no_kc_key(record, DE_DLR, DE_EURO);
 
-    case DE_SLSH:
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_BSLS); // Intercept hold function to send (backslash)
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case AND_PIPE_MACRO:
+      return process_tap_or_long_press_no_kc_key(record, DE_AMPR, DE_PIPE);
 
-    case DE_HASH:
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_TILD); // Intercept hold function to send ~
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case ACUT_GRAVE_MACRO:
+      return process_tap_or_long_press_no_kc_key(record, DE_ACUT, DE_GRV);
 
-    case DE_SECT:
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_DEG); // Intercept hold function to send °
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case SLASH_BACKSLASH_MACRO:
+      return process_tap_or_long_press_no_kc_key(record, DE_SLSH, DE_BSLS);
+
+    case HASH_TILD_MACRO:
+      return process_tap_or_long_press_no_kc_key(record, DE_HASH, DE_TILD);
+
+    case SECT_DEG_MACRO:
+      return process_tap_or_long_press_no_kc_key(record, DE_SECT, DE_DEG);
 
     // _NUM Macros
-    case LT(_NUM,KC_2):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_SUP2); // Intercept hold function to send °
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case TWO_POWER_MACRO:
+      return process_tap_or_long_press_key(record, DE_SUP2);
 
-    case LT(_NUM,KC_3):
-      if (!record->tap.count && record->event.pressed) {
-        tap_code16(DE_SUP3); // Intercept hold function to send °
-        return false;
-      }
-      return true;             // Return true for normal processing of tap keycode
+    case THREE_CUBE_MACRO:
+      return process_tap_or_long_press_key(record, DE_SUP3);
 
     // _FUN Macros
     case MOUSEJIGGLERMACRO:
