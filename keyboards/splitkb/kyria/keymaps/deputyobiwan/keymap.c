@@ -53,7 +53,6 @@ enum layers
 #define BRACKETS_MACRO LT(_SYM, KC_8)
 #define CURLY_BRACKETS_MACRO LT(_SYM, KC_9)
 #define QUOTES_MACRO LT(_SYM, KC_F10)
-#define QUOTES_US_MACRO LT(_SYM, KC_F11)
 
 // Custom feature-keys
 enum custom_keycodes {
@@ -139,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      [_SYM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      AND_PIPE_MACRO, BRACKETS_MACRO, ACUT_GRAVE_MACRO, SLASH_BACKSLASH_MACRO, HASH_TILD_MACRO, KC_NO,
        KC_NO, SECT_DEG_MACRO, DE_CIRC, DE_PERC, DE_AT, KC_DELETE,                                                   DOLLAR_EURO_MACRO, PARENTHESIS_MACRO, QUOTES_MACRO, DE_EQL, DE_ASTR, KC_NO,
-       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, CURLY_BRACKETS_MACRO, QUOTES_US_MACRO, DE_LABK, DE_RABK, KC_NO,
+       KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, CURLY_BRACKETS_MACRO, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                              DE_EXLM, DE_QUES, KC_NO, KC_NO, KC_NO
     ),
 
@@ -276,9 +275,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case QUOTES_MACRO:
       return process_tap_press_string_wrapper_key(record, DE_DQUO, DE_DQUO);
-
-    case QUOTES_US_MACRO:
-      return process_tap_press_string_wrapper_key(record, DE_QUOT, DE_QUOT);
 
     case DOLLAR_EURO_MACRO:
       return process_tap_or_long_press_no_kc_key(record, DE_DLR, DE_EURO);
