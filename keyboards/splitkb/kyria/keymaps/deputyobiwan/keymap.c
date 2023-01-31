@@ -229,6 +229,7 @@ static bool process_tap_or_long_press_no_kc_key(keyrecord_t* record, uint16_t ta
   return false;  // Skip default handling.
 }
 
+/* Currently not in use
 // Helper for implementing wrapper-symbols, e.g. printing "(" as first_string_keycode, then ")" as second_string_keycode and
 // then moving in between those strings with KC_LEFT.
 static bool process_tap_press_string_wrapper_key(keyrecord_t* record, uint16_t first_string_keycode, uint16_t second_string_keycode) {
@@ -239,6 +240,7 @@ static bool process_tap_press_string_wrapper_key(keyrecord_t* record, uint16_t f
   }
   return false;
 }
+*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -264,13 +266,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // _SYM Macros
     case PARENTHESIS_MACRO:
-      return process_tap_press_string_wrapper_key(record, DE_LPRN, DE_RPRN);
+      return process_tap_or_long_press_no_kc_key(record, DE_LPRN, DE_RPRN);
 
     case BRACKETS_MACRO:
-      return process_tap_press_string_wrapper_key(record, DE_LBRC, DE_RBRC);
+      return process_tap_or_long_press_no_kc_key(record, DE_LBRC, DE_RBRC);
 
     case CURLY_BRACKETS_MACRO:
-      return process_tap_press_string_wrapper_key(record, DE_LCBR, DE_RCBR);
+      return process_tap_or_long_press_no_kc_key(record, DE_LCBR, DE_RCBR);
 
     case DOLLAR_EURO_MACRO:
       return process_tap_or_long_press_no_kc_key(record, DE_DLR, DE_EURO);
