@@ -71,14 +71,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |   Z   |   X   |   C   |   D   |   V   |       |       |  |       |       |   K   |   H   |  , ;  |  . :  |  - _  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |SYM/Spc|NUM/Ent|  |MS/Tab|NAV/Bsp|       |       |       |
-    *                         `---------------------------------------'  `--------------------------------------'
+    *                         |       |       |NUM/Ent|SYM/Spc|       |  |       |NAV/Bsp|MS/Tab |       |       |
+    *                         `---------------------------------------'  `---------------------------------------'
     */
      [_COLEMAK_DH] = LAYOUT(
        KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                                                                                                  KC_J, KC_L, U_Ü_MACRO, DE_Y, DE_SS, KC_NO,
        KC_NO, A_Ä_MACRO, LALT_T(KC_R), LCTL_T(KC_S), LSFT_T(KC_T), LGUI_T(KC_G),                                    LGUI_T(KC_M), RSFT_T(KC_N), CTL_T(KC_E), LALT_T(KC_I), O_Ö_MACRO, KC_NO,
        KC_NO, DE_Z, KC_X, KC_C, KC_D, KC_V, KC_NO, KC_NO,                                                             KC_NO, KC_NO, KC_K, KC_H, COMMA_SEMICOLON_MACRO, DOT_COLON_MACRO, MINUS_UNDERSCORE_MACRO, KC_NO,
-                          KC_NO, KC_NO, KC_NO, LT(_SYM,KC_SPACE), LT(_NUM,KC_ENTER),      LT(_MS,KC_TAB), LT(_NAV_MED,KC_BACKSPACE), KC_NO, KC_NO, KC_NO
+                          KC_NO, KC_NO, LT(_NUM,KC_ENTER), LT(_SYM,KC_SPACE), KC_NO,      KC_NO, LT(_NAV_MED,KC_BACKSPACE), LT(_MS,KC_TAB), KC_NO, KC_NO
     ),
 
     /*
@@ -91,14 +91,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |VOL_PP |VOL_MTE|VOL_DN |VOL_UP |       |       |       |  |       |       |  Bsp  | COPY  | PASTE |  CUT  |       |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |  CTR  |  SFT  |  |       |   X   |       |       |       |
+    *                         |       |       |  CTR  |  SFT  |       |  |       |   X   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_NAV_MED] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_UP, KC_NO, KC_NO,                                                                                KC_ESCAPE, KC_NO, KC_PAGE_UP, KC_NO, KC_NO, KC_NO,
        KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END,                                                                 KC_DELETE, KC_NO, KC_PAGE_DOWN, KC_NO, KC_NO, KC_NO,
        KC_NO, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_BACKSPACE, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_LCTL, KC_LSFT,                                              KC_NO, KC_TRANSPARENT, KC_NO, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_LCTL, KC_LSFT, KC_NO,                                              KC_NO, KC_TRANSPARENT, KC_NO, KC_NO, KC_NO
     ),
 
     /*
@@ -111,14 +111,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |       |       |       |       |       |       |  |       |       |       | COPY  | PASTE |  CUT  |       |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |       |       |  |   X   |       |       |       |       |
+    *                         |       |       |       |       |       |  |       |       |   X   |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_MS] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_MS_UP, KC_NO, KC_NO,                                                         KC_NO, KC_MS_WH_LEFT, KC_MS_WH_UP, KC_MS_WH_RIGHT, KC_NO, KC_NO,
        KC_NO, KC_NO, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_NO,                                  KC_WWW_BACK, KC_MS_BTN1, KC_MS_WH_DOWN, KC_MS_BTN2, KC_WWW_FORWARD, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                        KC_NO, KC_NO, KC_NO, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                        KC_TRANSPARENT, KC_NO, KC_NO, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                        KC_NO, KC_NO, KC_TRANSPARENT, KC_NO, KC_NO
     ),
 
     /*
@@ -131,14 +131,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |  CUT  | PASTE | COPY  |  Bsp  |       |       |  |       |       |   +   |  { }  |  ' '  |   <   |   >   |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |   X   | Trans |  |   !   |   ?   |       |       |       |
+    *                         |       |       | Trans |   X   |       |  |       |   !   |   ?   |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_SYM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      AND_PIPE_MACRO, BRACKETS_MACRO, ACUT_GRAVE_MACRO, SLASH_BACKSLASH_MACRO, HASH_TILD_MACRO, KC_NO,
        KC_NO, SECT_DEG_MACRO, DE_CIRC, DE_PERC, DE_AT, KC_DELETE,                                                   DOLLAR_EURO_MACRO, PARENTHESIS_MACRO, DE_DQUO, DE_EQL, DE_ASTR, KC_NO,
        KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, CURLY_BRACKETS_MACRO, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                              DE_EXLM, DE_QUES, KC_NO, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                              KC_NO, DE_EXLM, DE_QUES, KC_NO, KC_NO
     ),
 
     /*
@@ -151,14 +151,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |  CUT  | PASTE | COPY  |       |       |       |  |       |       |       |   1   |  2 ²  |  3 ³  |       |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       | Trans |   X   |  |       |   0   |       |       |       |
+    *                         |       |       |   X   | Trans |       |  |       |   0   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_NUM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                                       KC_NO, KC_7, KC_8, KC_9, KC_NO, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                                       KC_NO, KC_4, KC_5, KC_6, KC_NO, KC_NO,
        KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_1, TWO_POWER_MACRO, THREE_CUBE_MACRO, KC_NO, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                           KC_NO, KC_0, KC_NO, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                           KC_NO, KC_0, KC_NO, KC_NO, KC_NO
     ),
 
     /*
@@ -171,14 +171,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |       |       |       |       |       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       |       |   X   |   X   |  |       |       |       |       |       |
+    *                         |       |       |   X   |   X   |       |  |       |       |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_FUN] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                               KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, MOUSEJIGGLERMACRO, KC_NO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
-                            KC_NO, KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     )
 };
 
