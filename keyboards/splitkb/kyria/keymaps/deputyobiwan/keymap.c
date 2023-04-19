@@ -56,6 +56,13 @@ enum layers
 // Custom feature-keys
 enum custom_keycodes {
   MOUSEJIGGLERMACRO = SAFE_RANGE,
+  GITST,
+  GITDF,
+  GITCM,
+  GITAP,
+  GITPL,
+  GITPS,
+  GITBA,
 };
 bool mouse_jiggle_mode = false;
 
@@ -165,19 +172,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * _FUN Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
-    * |       |       |       |       |       |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
+    * |       |       |       | GITBA | GITPS |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
-    * |       |       |       |       |       |       |                                  |       |  F3   |  F5   |  F6   |  F11  |       |
+    * |       | GITAP | GITCM | GITDF | GITST |       |                                  |       |  F3   |  F5   |  F6   |  F11  |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
-    * |       |       |       |       |       |JIGGLER|       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
+    * |       |       |       |       | GITPL |JIGGLER|       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |   X   |   X   |       |  |       |       |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_FUN] = LAYOUT(
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                               KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
-       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, MOUSEJIGGLERMACRO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
+       KC_NO, KC_NO, KC_NO, GITBA, GITPS, KC_NO,                                               KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
+       KC_NO, GITAP, GITCM, GITDF, GITST, KC_NO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
+       KC_NO, KC_NO, KC_NO, KC_NO, GITPL, MOUSEJIGGLERMACRO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
                             KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     )
 };
@@ -311,6 +318,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           mouse_jiggle_mode = true;
           SEND_STRING("Activated");
         }
+      }
+      break;
+
+    case GITST:
+      if (record->event.pressed) {
+        SEND_STRING("git status");
+        tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITDF:
+      if (record->event.pressed) {
+        SEND_STRING("git diff");
+        tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITCM:
+      if (record->event.pressed) {
+        SEND_STRING("git commit /am "); // This needs to be "/", so it converts to "-"
+        tap_code16(LSFT(DE_2));
+        tap_code16(LSFT(DE_2));
+        tap_code16(KC_LEFT);
+      }
+      break;
+
+    case GITAP:
+      if (record->event.pressed) {
+        SEND_STRING("git add /p ."); // This needs to be "/", so it converts to "-"
+        tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITPL:
+      if (record->event.pressed) {
+        SEND_STRING("git pull");
+        tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITPS:
+      if (record->event.pressed) {
+        SEND_STRING("git push");
+      }
+      break;
+
+    case GITBA:
+      if (record->event.pressed) {
+        SEND_STRING("git branch /avv"); // This needs to be "/", so it converts to "-"
+        tap_code16(KC_ENTER);
       }
       break;
   }
