@@ -63,6 +63,12 @@ enum custom_keycodes {
   GITPL,
   GITPS,
   GITBA,
+  GITCH,
+  GITRS,
+  GITSE,
+  GITSH,
+  GITSP,
+  GITRE,
 };
 bool mouse_jiggle_mode = false;
 
@@ -172,19 +178,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * _FUN Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
-    * |       |       |       | GITBA | GITPS |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
+    * |       | GITSP | GITRE | GITBA | GITPS |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
-    * |       | GITAP | GITCM | GITDF | GITST |       |                                  |       |  F3   |  F5   |  F6   |  F11  |       |
+    * |       | GITAP | GITCM | GITDF | GITST |JIGGLER|                                  |       |  F3   |  F5   |  F6   |  F11  |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
-    * |       |       |       |       | GITPL |JIGGLER|       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
+    * |       | GITSH | GITRS | GITCH | GITPL | GITSE |       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |   X   |   X   |       |  |       |       |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_FUN] = LAYOUT(
-       KC_NO, KC_NO, KC_NO, GITBA, GITPS, KC_NO,                                               KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
-       KC_NO, GITAP, GITCM, GITDF, GITST, KC_NO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
-       KC_NO, KC_NO, KC_NO, KC_NO, GITPL, MOUSEJIGGLERMACRO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
+       KC_NO, GITSP, GITRE, GITBA, GITPS, KC_NO,                                               KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
+       KC_NO, GITAP, GITCM, GITDF, GITST, MOUSEJIGGLERMACRO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
+       KC_NO, GITSH, GITRS, GITCH, GITPL, GITSE, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
                             KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     )
 };
@@ -368,6 +374,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING("git branch /avv"); // This needs to be "/", so it converts to "-"
         tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITCH:
+      if (record->event.pressed) {
+        SEND_STRING("git checkout ");
+      }
+      break;
+
+    case GITRS:
+      if (record->event.pressed) {
+        SEND_STRING("git restore .");
+      }
+      break;
+
+    case GITSE:
+      if (record->event.pressed) {
+        SEND_STRING("git checkout master; git pull; git remote prune origin; git branch /avv");
+        tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITSH:
+      if (record->event.pressed) {
+        SEND_STRING("git stash");
+        tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITSP:
+      if (record->event.pressed) {
+        SEND_STRING("git stash pop");
+        tap_code16(KC_ENTER);
+      }
+      break;
+
+    case GITRE:
+      if (record->event.pressed) {
+        SEND_STRING("git reset HEAD");
+        tap_code16(DE_TILD);
+        SEND_STRING("1");
       }
       break;
   }
