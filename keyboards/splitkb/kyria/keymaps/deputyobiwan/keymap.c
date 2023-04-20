@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * _MS Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
-    * |       |       |       | MS_UP |       |       |                                  |       |MS_W_LF|MS_W_UP|MS_W_RT|       |       |
+    * |       |       |       | MS_UP |       |       |                                  |       |MS_W_LF|MS_W_UP|MS_W_RT|JIGGLER|       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
     * |       |       |MS_LEFT|MS_DOWN|MS_RHT |       |                                  |BRO_BAK|MS_BT_1|MS_W_DN|MS_BT_2|BRO_FWD|       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
@@ -128,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_MS] = LAYOUT(
-       KC_NO, KC_NO, KC_NO, KC_MS_UP, KC_NO, KC_NO,                                                         KC_NO, KC_MS_WH_LEFT, KC_MS_WH_UP, KC_MS_WH_RIGHT, KC_NO, KC_NO,
+       KC_NO, KC_NO, KC_NO, KC_MS_UP, KC_NO, KC_NO,                                                         KC_NO, KC_MS_WH_LEFT, KC_MS_WH_UP, KC_MS_WH_RIGHT, MOUSEJIGGLERMACRO, KC_NO,
        KC_NO, KC_NO, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_NO,                                  KC_WWW_BACK, KC_MS_BTN1, KC_MS_WH_DOWN, KC_MS_BTN2, KC_WWW_FORWARD, KC_NO,
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                                        KC_NO, KC_NO, KC_NO, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                        KC_NO, KC_NO, KC_TRANSPARENT, KC_NO, KC_NO
@@ -180,7 +180,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * .-----------------------------------------------.                                  .-----------------------------------------------.
     * |       | GITSP | GITRE | GITBA | GITPS |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
-    * |       | GITAP | GITCM | GITDF | GITST |JIGGLER|                                  |       |  F3   |  F5   |  F6   |  F11  |       |
+    * |       | GITAP | GITCM | GITDF | GITST |       |                                  |       |  F3   |  F5   |  F6   |  F11  |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       | GITSH | GITRS | GITCH | GITPL | GITSE |       |       |  |       |       |       |  F1   |  F2   |  F3   |  F12  |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
      [_FUN] = LAYOUT(
        KC_NO, GITSP, GITRE, GITBA, GITPS, KC_NO,                                               KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
-       KC_NO, GITAP, GITCM, GITDF, GITST, MOUSEJIGGLERMACRO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
+       KC_NO, GITAP, GITCM, GITDF, GITST, KC_NO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
        KC_NO, GITSH, GITRS, GITCH, GITPL, GITSE, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
                             KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     )
