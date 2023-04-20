@@ -391,7 +391,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case GITSE:
       if (record->event.pressed) {
-        SEND_STRING("git checkout master; git pull; git remote prune origin; git branch /avv");
+        SEND_STRING("git checkout master");
+        tap_code16(DE_SCLN);
+        SEND_STRING(" git pull");
+        tap_code16(DE_SCLN);
+        SEND_STRING(" git remote prune origin");
+        tap_code16(DE_SCLN);
+        SEND_STRING(" git branch /avv");
         tap_code16(KC_ENTER);
       }
       break;
