@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
     * |       | HOME  | LEFT  | DOWN  | RIGHT |  END  |                                  |  Del  |       | PGDN  |       |       |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
-    * |       |VOL_PP |VOL_MTE|VOL_DN |VOL_UP |       |       |       |  |       |       |  Bsp  | COPY  | PASTE |  CUT  |       |       |
+    * |       |VOL_PP |VOL_MTE|VOL_DN |VOL_UP |       |       |       |  |       |       |  Bsp  | COPY  | PASTE |  CUT  |  BOOT |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
     *                         |       |       |  CTR  |  SFT  |       |  |       |   X   |       |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
@@ -110,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      [_NAV_MED] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_UP, KC_NO, KC_NO,                                                                                KC_ESCAPE, KC_NO, KC_PAGE_UP, KC_NO, KC_NO, KC_NO,
        KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END,                                                                 KC_DELETE, KC_NO, KC_PAGE_DOWN, KC_NO, KC_NO, KC_NO,
-       KC_NO, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_BACKSPACE, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), KC_NO, KC_NO,
+       KC_NO, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_BACKSPACE, LCTL(KC_C), LCTL(KC_V), LCTL(KC_X), QK_BOOTLOADER, KC_NO,
                             KC_NO, KC_NO, KC_LCTL, KC_LSFT, KC_NO,                                              KC_NO, KC_TRANSPARENT, KC_NO, KC_NO, KC_NO
     ),
 
@@ -178,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * _FUN Layer
     *
     * .-----------------------------------------------.                                  .-----------------------------------------------.
-    * |       | GITSP | GITRE | GITBA | GITPS |       |                                  | MENU  |  F7   |  F8   |  F9   |  F10  |       |
+    * |       | GITSP | GITRE | GITBA | GITPS |       |                                  |       |  F7   |  F8   |  F9   |  F10  |       |
     * |-------+-------+-------+-------+-------+-------|                                  |-------+-------+-------+-------+-------+-------|
     * |       | GITAP | GITCM | GITDF | GITST |       |                                  |       |  F3   |  F5   |  F6   |  F11  |       |
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_FUN] = LAYOUT(
-       KC_NO, GITSP, GITRE, GITBA, GITPS, KC_NO,                                               KC_MENU, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
+       KC_NO, GITSP, GITRE, GITBA, GITPS, KC_NO,                                               KC_NO, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
        KC_NO, GITAP, GITCM, GITDF, GITST, KC_NO,                                     KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,
        KC_NO, GITSH, GITRS, GITCH, GITPL, GITSE, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, KC_NO,
                             KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
