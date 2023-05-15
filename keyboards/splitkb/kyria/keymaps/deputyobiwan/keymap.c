@@ -144,14 +144,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |-------+-------+-------+-------+-------+-------+---------------.  .---------------+-------+-------+-------+-------+-------+-------|
     * |       |       |  CUT  | PASTE | COPY  |  Bsp  |       |       |  |       |       |   +   |  { }  |  ' '  |   <   |   >   |       |
     * `-----------------------+-------+-------+-------+-------+-------|  |-------+-------+-------+-------+-------+-----------------------'
-    *                         |       |       | Trans |   X   |       |  |       |   !   |   ?   |       |       |
+    *                         |       |       | Trans |   X   |       |  |       |   ?   |   !   |       |       |
     *                         `---------------------------------------'  `---------------------------------------'
     */
      [_SYM] = LAYOUT(
        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_ESCAPE,                                                      AND_PIPE_MACRO, BRACKETS_MACRO, ACUT_GRAVE_MACRO, SLASH_BACKSLASH_MACRO, HASH_TILD_MACRO, KC_NO,
        KC_NO, SECT_DEG_MACRO, DE_CIRC, DE_PERC, DE_AT, KC_DELETE,                                                   DOLLAR_EURO_MACRO, PARENTHESIS_MACRO, DE_DQUO, DE_EQL, DE_ASTR, KC_NO,
        KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_V), LCTL(KC_C), KC_BACKSPACE, KC_NO, KC_NO,           KC_NO, KC_NO, DE_PLUS, CURLY_BRACKETS_MACRO, DE_QUOT, DE_LABK, DE_RABK, KC_NO,
-                            KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                              KC_NO, DE_EXLM, DE_QUES, KC_NO, KC_NO
+                            KC_NO, KC_NO, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                              KC_NO, DE_QUES, DE_EXLM, KC_NO, KC_NO
     ),
 
     /*
@@ -318,11 +318,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (mouse_jiggle_mode) {
           SEND_STRING(SS_DELAY(15));
           mouse_jiggle_mode = false;
-          SEND_STRING("Deactivated");
+          SEND_STRING("0");
         } else {
           SEND_STRING(SS_DELAY(15));
           mouse_jiggle_mode = true;
-          SEND_STRING("Activated");
+          SEND_STRING("1");
         }
       }
       break;
